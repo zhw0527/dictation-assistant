@@ -1,10 +1,28 @@
 <!--pages/dictation/dictation.wxml-->
 <view class="container">
-  <view class="word-display">
+  <!-- 积分显示区域 -->
+  <view class="points-display" wx:if="{{isStarted}}">
+    <view class="total-points">
+      <text class="points-label">总积分</text>
+      <text class="points-value">{{totalPoints}}</text>
+    </view>
+    <view class="session-points">
+      <text class="session-label">本次</text>
+      <text class="session-value">+{{sessionPoints}}</text>
+    </view>
+    <view class="streak-display" wx:if="{{streak > 0}}">
+      <text class="streak-icon">🔥</text>
+      <text class="streak-value">{{streak}} 连击</text>
+    </view>
+  </view>
+
+  <!-- 词汇显示区域 -->
+  <view class="word-display {{answerAnimation}}">
     <text class="current-word">{{currentWord || '准备开始'}}</text>
     <text class="word-index">{{currentIndex + 1}} / {{wordList.length}}</text>
   </view>
 
+  <!-- 输入区域 -->
   <view class="input-area">
     <input 
       class="word-input" 
@@ -15,6 +33,19 @@
     />
   </view>
 
+  <!-- 语音输入按钮 -->
+  <view class="voice-input" wx:if="{{isStarted}}">
+    <button 
+      class="btn-record {{isRecording ? 'recording' : ''}}" 
+      bindtouchstart="startRecord"
+      bindtouchend="stopRecord"
+    >
+      <text class="record-icon">{{isRecording ? '🎤' : '🎙️'}}</text>
+      <text class="record-text">{{isRecording ? '录音中...' : '按住说话'}}</text>
+    </button>
+  </view>
+
+  <!-- 控制按钮 -->
   <view class="control-buttons">
     <button class="btn-control" bindtap="playWord" wx:if="{{isStarted}}">
       🔊 播放
@@ -30,6 +61,7 @@
     </button>
   </view>
 
+  <!-- 进度条 -->
   <view class="progress-bar">
     <view class="progress" style="width: {{progress}}%"></view>
   </view>
