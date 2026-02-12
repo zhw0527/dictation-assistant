@@ -69,7 +69,7 @@
 
 ### 阿里云服务器
 - **公网IP**: ***REMOVED_SERVER_IP***
-- **登录密码**: !Zhw19840527
+- **登录密码**: ***REMOVED_PASSWORD***
 
 ---
 

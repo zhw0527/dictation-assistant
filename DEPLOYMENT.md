@@ -38,7 +38,7 @@
 
 ```bash
 ssh root@***REMOVED_SERVER_IP***
-# 密码: !Zhw19840527
+# 密码: ***REMOVED_PASSWORD***
 ```
 
 ### 安装 Node.js（如果未安装）

@@ -87,7 +87,7 @@ cd ~/Documents/听写助理
 ```bash
 # 1. 连接服务器
 ssh root@***REMOVED_SERVER_IP***
-# 密码: !Zhw19840527
+# 密码: ***REMOVED_PASSWORD***
 
 # 2. 在本地上传项目（新开一个终端）
 scp -r ~/Documents/听写助理 root@***REMOVED_SERVER_IP***:/root/
