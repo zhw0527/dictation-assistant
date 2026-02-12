@@ -1,0 +1,218 @@
+/* pages/ranking/ranking.wxss */
+.container {
+  min-height: 100vh;
+  padding-bottom: 150rpx;
+  background: linear-gradient(180deg, #667eea 0%, #f5f5f5 30%);
+}
+
+/* 排行榜头部 */
+.ranking-header {
+  padding: 40rpx;
+  color: white;
+}
+
+.ranking-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  text-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+.tab-bar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  padding: 8rpx;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  background: white;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* 前三名展示 */
+.top-three {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 40rpx 20rpx;
+  gap: 20rpx;
+}
+
+.top-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.top-1 {
+  transform: translateY(-20rpx);
+}
+
+.top-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 6rpx solid white;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.15);
+  margin-bottom: 15rpx;
+}
+
+.top-avatar.champion {
+  width: 140rpx;
+  height: 140rpx;
+  border-color: #FFD700;
+}
+
+.top-medal {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.champion-medal {
+  font-size: 60rpx;
+  animation: float 2s ease-in-out infinite;
+}
+
+.top-name {
+  font-size: 26rpx;
+  color: white;
+  margin-bottom: 8rpx;
+  font-weight: bold;
+}
+
+.top-points {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.champion-points {
+  font-size: 28rpx;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+/* 排行榜列表 */
+.ranking-list {
+  background: white;
+  border-radius: 30rpx 30rpx 0 0;
+  padding: 30rpx 20rpx;
+  margin-top: 20rpx;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  margin-bottom: 15rpx;
+  transition: all 0.3s;
+}
+
+.ranking-item:active {
+  transform: scale(0.98);
+  background: #e9ecef;
+}
+
+.rank-number {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: #e9ecef;
+  color: #666;
+  font-size: 28rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.rank-4, .rank-5, .rank-6 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.user-name {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-points {
+  font-size: 28rpx;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* 加载中 */
+.loading {
+  text-align: center;
+  padding: 60rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 我的排名 */
+.my-ranking {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 30rpx 40rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  z-index: 100;
+}
+
+.my-rank-info, .my-points-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-rank-label, .my-points-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.my-rank-value, .my-points-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* 动画 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10rpx);
+  }
+}

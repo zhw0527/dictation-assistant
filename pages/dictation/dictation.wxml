@@ -50,6 +50,9 @@
     <button class="btn-control" bindtap="playWord" wx:if="{{isStarted}}">
       🔊 播放
     </button>
+    <button class="btn-control" bindtap="takePhoto" wx:if="{{isStarted}}">
+      📷 拍照批改
+    </button>
     <button class="btn-control btn-primary" bindtap="nextWord" wx:if="{{isStarted}}">
       下一个
     </button>

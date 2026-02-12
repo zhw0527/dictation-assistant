@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/dictation/dictation",
-    "pages/history/history"
+    "pages/history/history",
+    "pages/correction/correction",
+    "pages/ranking/ranking"
   ],
   "window": {
     "backgroundTextStyle": "light",

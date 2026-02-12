@@ -1,0 +1,92 @@
+<!--pages/ranking/ranking.wxml-->
+<view class="container">
+  <!-- 排行榜头部 -->
+  <view class="ranking-header">
+    <text class="ranking-title">🏆 排行榜</text>
+    
+    <!-- 标签切换 -->
+    <view class="tab-bar">
+      <view 
+        class="tab {{currentTab === 'daily' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="daily"
+      >
+        今日
+      </view>
+      <view 
+        class="tab {{currentTab === 'weekly' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="weekly"
+      >
+        本周
+      </view>
+      <view 
+        class="tab {{currentTab === 'all' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="all"
+      >
+        总榜
+      </view>
+    </view>
+  </view>
+
+  <!-- 前三名特殊展示 -->
+  <view class="top-three">
+    <view class="top-item top-2" wx:if="{{rankingList[1]}}">
+      <image class="top-avatar" src="{{rankingList[1].avatar}}"></image>
+      <view class="top-medal">🥈</view>
+      <text class="top-name">{{rankingList[1].name}}</text>
+      <text class="top-points">{{rankingList[1].points}} 分</text>
+    </view>
+
+    <view class="top-item top-1" wx:if="{{rankingList[0]}}">
+      <image class="top-avatar champion" src="{{rankingList[0].avatar}}"></image>
+      <view class="top-medal champion-medal">👑</view>
+      <text class="top-name">{{rankingList[0].name}}</text>
+      <text class="top-points champion-points">{{rankingList[0].points}} 分</text>
+    </view>
+
+    <view class="top-item top-3" wx:if="{{rankingList[2]}}">
+      <image class="top-avatar" src="{{rankingList[2].avatar}}"></image>
+      <view class="top-medal">🥉</view>
+      <text class="top-name">{{rankingList[2].name}}</text>
+      <text class="top-points">{{rankingList[2].points}} 分</text>
+    </view>
+  </view>
+
+  <!-- 排行榜列表 -->
+  <view class="ranking-list">
+    <view 
+      class="ranking-item" 
+      wx:for="{{rankingList}}" 
+      wx:key="id"
+      wx:if="{{index >= 3}}"
+      bindtap="viewUserDetail"
+      data-user-id="{{item.id}}"
+    >
+      <view class="rank-number rank-{{index + 1}}">
+        {{index + 1}}
+      </view>
+      <image class="user-avatar" src="{{item.avatar}}"></image>
+      <text class="user-name">{{item.name}}</text>
+      <text class="user-points">{{item.points}} 分</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 我的排名 -->
+  <view class="my-ranking">
+    <view class="my-rank-info">
+      <text class="my-rank-label">我的排名</text>
+      <text class="my-rank-value">第 {{myRank}} 名</text>
+    </view>
+    <view class="my-points-info">
+      <text class="my-points-label">我的积分</text>
+      <text class="my-points-value">{{myPoints}} 分</text>
+    </view>
+  </view>
+</view>

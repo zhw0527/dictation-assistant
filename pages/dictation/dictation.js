@@ -342,5 +342,60 @@ Page({
     setTimeout(() => {
       this.setData({ answerAnimation: '' })
     }, 600)
+  },
+
+  // 新增：拍照批改
+  async takePhoto() {
+    try {
+      // 选择图片
+      const res = await wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['camera', 'album']
+      })
+
+      const imagePath = res.tempFilePaths[0]
+      
+      // 调用批改功能
+      await this.correctByPhoto(imagePath)
+      
+    } catch (error) {
+      console.error('拍照失败:', error)
+      if (error.errMsg && !error.errMsg.includes('cancel')) {
+        wx.showToast({
+          title: '拍照失败',
+          icon: 'none'
+        })
+      }
+    }
+  },
+
+  // 新增：通过照片批改
+  async correctByPhoto(imagePath) {
+    const photoCorrection = require('../../utils/photo-correction')
+    
+    try {
+      // 识别文字
+      const recognizedTexts = await photoCorrection.recognizeText(imagePath)
+      
+      // 批改答案
+      const { wordList } = this.data
+      const results = photoCorrection.correctAnswers(recognizedTexts, wordList)
+      
+      // 生成报告
+      const report = photoCorrection.generateReport(results)
+      
+      // 跳转到批改结果页面
+      wx.navigateTo({
+        url: `/pages/correction/correction?report=${encodeURIComponent(JSON.stringify(report))}`
+      })
+      
+    } catch (error) {
+      console.error('批改失败:', error)
+      wx.showToast({
+        title: '批改失败，请重试',
+        icon: 'none'
+      })
+    }
   }
 })

@@ -22,6 +22,13 @@ Page({
     })
   },
 
+  // 查看排行榜
+  goToRanking() {
+    wx.navigateTo({
+      url: '/pages/ranking/ranking'
+    })
+  },
+
   // 导入词汇
   importWords() {
     wx.showToast({

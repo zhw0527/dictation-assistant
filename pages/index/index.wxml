@@ -18,6 +18,12 @@
       <text class="feature-desc">查看听写历史</text>
     </view>
 
+    <view class="feature-item" bindtap="goToRanking">
+      <view class="feature-icon">🏆</view>
+      <text class="feature-title">排行榜</text>
+      <text class="feature-desc">查看积分排名</text>
+    </view>
+
     <view class="feature-item" bindtap="importWords">
       <view class="feature-icon">📥</view>
       <text class="feature-title">导入词汇</text>
