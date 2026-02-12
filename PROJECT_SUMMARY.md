@@ -50,26 +50,10 @@
 - **本地路径**: /Users/zhouwen/Documents/听写助理
 - **分支**: main
 
-### 微信小程序
-- **AppID**: ***REMOVED_APPID***
-- **AppSecret**: ***REMOVED_SECRET***
+### 配置信息
+所有敏感信息（微信小程序 AppID/AppSecret、百度云 API 密钥、服务器密码等）已保存在 `CREDENTIALS.md` 文件中。
 
-### 百度云服务
-
-#### 文字识别 (OCR)
-- **应用名称**: ***REMOVED_APP_NAME***
-- **AppID**: ***REMOVED_APP_ID***
-- **API Key**: ***REMOVED_API_KEY***
-- **Secret Key**: ***REMOVED_SECRET_KEY***
-
-#### 语音合成 (TTS)
-- **AppID**: ***REMOVED_APP_ID***
-- **API Key**: ***REMOVED_API_KEY***
-- **Secret Key**: ***REMOVED_SECRET_KEY***
-
-### 阿里云服务器
-- **公网IP**: ***REMOVED_SERVER_IP***
-- **登录密码**: ***REMOVED_PASSWORD***
+⚠️ **重要**：`CREDENTIALS.md` 和 `config.js` 已添加到 `.gitignore`，不会提交到 GitHub。
 
 ---
 
@@ -94,18 +78,18 @@ npm start
 
 1. 打开微信开发者工具
 2. 导入项目：`/Users/zhouwen/Documents/听写助理`
-3. 填写 AppID：`***REMOVED_APPID***`
+3. 填写 AppID（查看 `CREDENTIALS.md` 文件）
 4. 在"详情" -> "本地设置"中勾选"不校验合法域名"
 5. 点击"编译"测试功能
 
 ### 3. 部署到阿里云服务器
 
 ```bash
-# 连接服务器
-ssh root@***REMOVED_SERVER_IP***
+# 连接服务器（密码查看 CREDENTIALS.md）
+ssh root@YOUR_SERVER_IP
 
 # 上传项目（在本地执行）
-scp -r ~/Documents/听写助理 root@***REMOVED_SERVER_IP***:/root/
+scp -r ~/Documents/听写助理 root@YOUR_SERVER_IP:/root/
 
 # 在服务器上部署
 cd /root/听写助理
@@ -117,7 +101,7 @@ pm2 save
 ### 4. 配置微信小程序服务器域名
 
 在微信公众平台（https://mp.weixin.qq.com/）配置：
-- request 合法域名：`http://***REMOVED_SERVER_IP***`
+- request 合法域名：`https://YOUR_DOMAIN`
 
 ⚠️ **注意**：正式上线前需要配置 HTTPS
 

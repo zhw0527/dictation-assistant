@@ -37,7 +37,7 @@ cd ~/Documents/听写助理
 2. 选择"导入项目"
 3. 填写信息：
    - **项目目录**：`/Users/zhouwen/Documents/听写助理`
-   - **AppID**：`***REMOVED_APPID***`
+   - **AppID**：请查看 `CREDENTIALS.md` 文件
    - **项目名称**：听写助理
 4. 点击"导入"
 
@@ -85,12 +85,11 @@ cd ~/Documents/听写助理
 当您准备好部署到阿里云服务器时：
 
 ```bash
-# 1. 连接服务器
-ssh root@***REMOVED_SERVER_IP***
-# 密码: ***REMOVED_PASSWORD***
+# 1. 连接服务器（密码请查看 CREDENTIALS.md）
+ssh root@YOUR_SERVER_IP
 
 # 2. 在本地上传项目（新开一个终端）
-scp -r ~/Documents/听写助理 root@***REMOVED_SERVER_IP***:/root/
+scp -r ~/Documents/听写助理 root@YOUR_SERVER_IP:/root/
 
 # 3. 在服务器上安装依赖并启动
 cd /root/听写助理
@@ -119,17 +118,11 @@ pm2 startup
 
 ## 🔑 重要信息
 
-### 微信小程序
-- **AppID**: `***REMOVED_APPID***`
-
-### 服务器
-- **地址**: `http://***REMOVED_SERVER_IP***:3000`
+所有敏感配置信息（AppID、密钥、服务器密码等）已保存在 `CREDENTIALS.md` 文件中（该文件不会提交到 Git）。
 
 ### API 服务
 - 百度语音合成（TTS）✅
 - 百度文字识别（OCR）✅
-
-所有配置信息已保存在 `config.js` 和 `CREDENTIALS.md` 中。
 
 ---
 
