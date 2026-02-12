@@ -1,0 +1,29 @@
+{
+  "name": "dictation-assistant-server",
+  "version": "1.0.0",
+  "description": "听写助理后端服务",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dictation",
+    "wechat",
+    "miniprogram",
+    "tts",
+    "ocr"
+  ],
+  "author": "zhw0527",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "baidu-aip-sdk": "^4.16.13"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

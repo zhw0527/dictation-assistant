@@ -1,4 +1,6 @@
 // pages/dictation/dictation.js
+const api = require('../../utils/api')
+
 Page({
   data: {
     wordList: ['苹果', '香蕉', '橙子', '葡萄', '西瓜'], // 示例词汇
@@ -7,11 +9,20 @@ Page({
     userInput: '',
     isStarted: false,
     progress: 0,
-    answers: []
+    answers: [],
+    isPlaying: false
   },
 
-  onLoad() {
+  onLoad(options) {
     // 可以从上一页接收词汇列表
+    if (options.words) {
+      try {
+        const words = JSON.parse(decodeURIComponent(options.words))
+        this.setData({ wordList: words })
+      } catch (e) {
+        console.error('解析词汇列表失败', e)
+      }
+    }
   },
 
   // 开始听写
@@ -38,13 +49,44 @@ Page({
   },
 
   // 播放词汇
-  playWord() {
-    const { currentWord } = this.data
-    wx.showToast({
-      title: `播放: ${currentWord}`,
-      icon: 'none'
+  async playWord() {
+    const { currentWord, isPlaying } = this.data
+    
+    if (isPlaying) {
+      wx.showToast({
+        title: '正在播放中...',
+        icon: 'none'
+      })
+      return
+    }
+
+    this.setData({ isPlaying: true })
+    
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
     })
-    // TODO: 集成语音播报API
+
+    try {
+      // 调用语音合成API
+      const audioData = await api.textToSpeech(currentWord)
+      
+      wx.hideLoading()
+      
+      // 播放音频
+      await api.playAudio(audioData)
+      
+      this.setData({ isPlaying: false })
+    } catch (error) {
+      wx.hideLoading()
+      this.setData({ isPlaying: false })
+      
+      console.error('播放失败', error)
+      wx.showToast({
+        title: '播放失败，请重试',
+        icon: 'none'
+      })
+    }
   },
 
   // 输入内容

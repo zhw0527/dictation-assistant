@@ -14,3 +14,9 @@ npm-debug.log*
 # 临时文件
 *.tmp
 *.temp
+
+# 配置文件（包含敏感信息）
+config.js
+server/config.js
+*.env
+CREDENTIALS.md
