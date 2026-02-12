@@ -4,7 +4,8 @@
     "pages/dictation/dictation",
     "pages/history/history",
     "pages/correction/correction",
-    "pages/ranking/ranking"
+    "pages/ranking/ranking",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

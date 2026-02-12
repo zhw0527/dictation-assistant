@@ -1,0 +1,53 @@
+<!--pages/test/test.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">百度 AI 测试</text>
+    <text class="subtitle">测试 TTS 和 OCR 功能</text>
+  </view>
+
+  <!-- 测试按钮 -->
+  <view class="test-buttons">
+    <button 
+      class="test-btn tts-btn" 
+      bindtap="testTTS"
+      disabled="{{testing}}"
+    >
+      🔊 测试 TTS (语音合成)
+    </button>
+    
+    <button 
+      class="test-btn ocr-btn" 
+      bindtap="testOCR"
+      disabled="{{testing}}"
+    >
+      📷 测试 OCR (文字识别)
+    </button>
+  </view>
+
+  <!-- 日志区域 -->
+  <view class="log-section">
+    <view class="log-header">
+      <text class="log-title">测试日志</text>
+      <view class="log-actions">
+        <button class="log-btn" bindtap="copyLog" size="mini">复制</button>
+        <button class="log-btn" bindtap="clearLog" size="mini">清空</button>
+      </view>
+    </view>
+    
+    <scroll-view class="log-content" scroll-y="true" scroll-into-view="log-bottom">
+      <view class="log-item" wx:for="{{testResults}}" wx:key="index">
+        {{item}}
+      </view>
+      <view id="log-bottom"></view>
+    </scroll-view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="tips">
+    <text class="tips-title">💡 使用说明</text>
+    <text class="tips-text">1. 点击"测试 TTS"会合成并播放语音</text>
+    <text class="tips-text">2. 点击"测试 OCR"需要选择一张包含文字的图片</text>
+    <text class="tips-text">3. 测试日志会显示详细的执行过程</text>
+    <text class="tips-text">4. 如果测试失败，请检查网络和 API 配置</text>
+  </view>
+</view>

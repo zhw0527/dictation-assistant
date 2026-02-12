@@ -1,0 +1,128 @@
+/* pages/test/test.wxss */
+.container {
+  min-height: 100vh;
+  padding: 40rpx;
+  background: #f5f5f5;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 测试按钮 */
+.test-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.test-btn {
+  padding: 40rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+
+.tts-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ocr-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.test-btn[disabled] {
+  opacity: 0.6;
+}
+
+/* 日志区域 */
+.log-section {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.log-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.log-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.log-btn {
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+}
+
+.log-content {
+  height: 600rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.log-item {
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 10rpx;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+}
+
+/* 说明 */
+.tips {
+  background: #fff7e6;
+  border-left: 4rpx solid #fa8c16;
+  border-radius: 12rpx;
+  padding: 30rpx;
+}
+
+.tips-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #d46b08;
+  margin-bottom: 15rpx;
+}
+
+.tips-text {
+  display: block;
+  font-size: 24rpx;
+  color: #8c5c0a;
+  line-height: 1.8;
+  margin-bottom: 8rpx;
+}

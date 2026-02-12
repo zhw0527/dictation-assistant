@@ -1,4 +1,5 @@
 const config = require('../config')
+const baiduAI = require('./baidu-ai-direct')
 
 /**
  * 拍照批改工具
@@ -6,9 +7,8 @@ const config = require('../config')
  */
 class PhotoCorrection {
   constructor() {
-    this.ocrApiUrl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic'
-    this.tokenCache = null
-    this.tokenExpireTime = 0
+    // 使用直接调用的 OCR
+    this.ocr = baiduAI.ocr
   }
 
   /**
@@ -20,65 +20,17 @@ class PhotoCorrection {
     try {
       wx.showLoading({ title: '识别中...' })
 
-      // 读取图片
-      const fs = wx.getFileSystemManager()
-      const imageData = fs.readFileSync(imagePath, 'base64')
-
-      // 获取 Access Token
-      const token = await this.getAccessToken()
-
-      // 调用 OCR API
-      const result = await this.callOCRAPI(token, imageData)
+      // 调用百度 OCR
+      const result = await this.ocr.recognizeText(imagePath)
 
       wx.hideLoading()
 
-      return this.parseOCRResult(result)
+      return result
     } catch (error) {
       wx.hideLoading()
       console.error('文字识别失败:', error)
       throw error
     }
-  }
-
-  /**
-   * 调用百度 OCR API
-   */
-  async callOCRAPI(token, imageData) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: `${this.ocrApiUrl}?access_token=${token}`,
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          image: imageData,
-          detect_direction: 'true',
-          paragraph: 'false',
-          probability: 'true'
-        },
-        success: (res) => {
-          if (res.statusCode === 200 && res.data.words_result) {
-            resolve(res.data)
-          } else {
-            reject(new Error(res.data.error_msg || '识别失败'))
-          }
-        },
-        fail: reject
-      })
-    })
-  }
-
-  /**
-   * 解析 OCR 结果
-   */
-  parseOCRResult(response) {
-    const wordsResult = response.words_result || []
-    
-    return wordsResult.map(item => ({
-      text: item.words.trim(),
-      confidence: item.probability ? item.probability.average : 0
-    }))
   }
 
   /**
@@ -239,37 +191,6 @@ class PhotoCorrection {
     return '需努力'
   }
 
-  /**
-   * 获取百度 Access Token
-   */
-  async getAccessToken() {
-    const now = Date.now()
-    if (this.tokenCache && now < this.tokenExpireTime) {
-      return this.tokenCache
-    }
-
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: 'https://aip.baidubce.com/oauth/2.0/token',
-        method: 'GET',
-        data: {
-          grant_type: 'client_credentials',
-          client_id: config.baiduOCR.apiKey,
-          client_secret: config.baiduOCR.secretKey
-        },
-        success: (res) => {
-          if (res.statusCode === 200 && res.data.access_token) {
-            this.tokenCache = res.data.access_token
-            this.tokenExpireTime = now + (29 * 24 * 60 * 60 * 1000)
-            resolve(this.tokenCache)
-          } else {
-            reject(new Error('获取 token 失败'))
-          }
-        },
-        fail: reject
-      })
-    })
-  }
 }
 
 module.exports = new PhotoCorrection()

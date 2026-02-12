@@ -1,5 +1,5 @@
 // pages/dictation/dictation.js
-const api = require('../../utils/api')
+const baiduAI = require('../../utils/baidu-ai-direct')
 const voiceEvaluation = require('../../utils/voice-evaluation')
 const pointsSystem = require('../../utils/points-system')
 
@@ -108,13 +108,13 @@ Page({
     })
 
     try {
-      // 调用语音合成API
-      const audioData = await api.textToSpeech(currentWord)
+      // 调用语音合成API（直接调用百度）
+      const audioData = await baiduAI.tts.textToSpeech(currentWord)
       
       wx.hideLoading()
       
       // 播放音频
-      await api.playAudio(audioData)
+      await baiduAI.tts.playAudio(audioData)
       
       this.setData({ isPlaying: false })
     } catch (error) {
