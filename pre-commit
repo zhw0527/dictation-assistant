@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Git pre-commit hook - 防止敏感信息提交
+# 自动安装: cp pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+echo "🔍 检查敏感信息..."
+
+# 定义敏感信息的正则表达式模式
+PATTERNS=(
+    "appSecret.*['\"][a-zA-Z0-9]{32}['\"]"
+    "apiKey.*['\"][a-zA-Z0-9]{24,}['\"]"
+    "secretKey.*['\"][a-zA-Z0-9]{32,}['\"]"
+    "password.*['\"][^'\"]{6,}['\"]"
+    "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+    "wxa[a-z0-9]{16}"
+)
+
+# 检查将要提交的文件
+FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+FOUND_SECRETS=0
+
+for FILE in $FILES; do
+    # 跳过二进制文件和特定文件
+    if [[ "$FILE" == *.jpg ]] || [[ "$FILE" == *.png ]] || \
+       [[ "$FILE" == *.gif ]] || [[ "$FILE" == *.pdf ]] || \
+       [[ "$FILE" == "config.js" ]] || [[ "$FILE" == "CREDENTIALS.md" ]]; then
+        continue
+    fi
+    
+    # 检查每个模式
+    for PATTERN in "${PATTERNS[@]}"; do
+        if git diff --cached "$FILE" | grep -qE "$PATTERN"; then
+            echo "⚠️  警告: 在 $FILE 中发现可能的敏感信息"
+            echo "   模式: $PATTERN"
+            FOUND_SECRETS=1
+        fi
+    done
+done
+
+if [ $FOUND_SECRETS -eq 1 ]; then
+    echo ""
+    echo "❌ 提交被阻止！发现可能的敏感信息。"
+    echo ""
+    echo "请检查以下内容："
+    echo "1. 是否包含 API 密钥、密码或 token？"
+    echo "2. 是否应该使用环境变量代替？"
+    echo "3. 是否应该添加到 .gitignore？"
+    echo ""
+    echo "如果确认安全，可以使用以下命令跳过检查："
+    echo "  git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+echo "✅ 未发现敏感信息，继续提交"
+exit 0
