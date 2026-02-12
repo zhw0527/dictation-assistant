@@ -1,0 +1,36 @@
+<!--pages/dictation/dictation.wxml-->
+<view class="container">
+  <view class="word-display">
+    <text class="current-word">{{currentWord || '准备开始'}}</text>
+    <text class="word-index">{{currentIndex + 1}} / {{wordList.length}}</text>
+  </view>
+
+  <view class="input-area">
+    <input 
+      class="word-input" 
+      placeholder="请输入听到的内容"
+      value="{{userInput}}"
+      bindinput="onInput"
+      disabled="{{!isStarted}}"
+    />
+  </view>
+
+  <view class="control-buttons">
+    <button class="btn-control" bindtap="playWord" wx:if="{{isStarted}}">
+      🔊 播放
+    </button>
+    <button class="btn-control btn-primary" bindtap="nextWord" wx:if="{{isStarted}}">
+      下一个
+    </button>
+    <button class="btn-control btn-primary" bindtap="startDictation" wx:if="{{!isStarted}}">
+      开始听写
+    </button>
+    <button class="btn-control" bindtap="finishDictation" wx:if="{{isStarted}}">
+      完成
+    </button>
+  </view>
+
+  <view class="progress-bar">
+    <view class="progress" style="width: {{progress}}%"></view>
+  </view>
+</view>

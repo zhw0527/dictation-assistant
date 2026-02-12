@@ -1,0 +1,26 @@
+<!--pages/history/history.wxml-->
+<view class="container">
+  <view class="history-list" wx:if="{{historyList.length > 0}}">
+    <view class="history-item" wx:for="{{historyList}}" wx:key="index">
+      <view class="history-header">
+        <text class="history-date">{{item.date}}</text>
+        <text class="history-score">{{item.score}}/{{item.answers.length}}</text>
+      </view>
+      <view class="history-details">
+        <view class="answer-item" wx:for="{{item.answers}}" wx:key="index" wx:for-item="answer">
+          <text class="word">{{answer.word}}</text>
+          <text class="user-answer {{answer.correct ? 'correct' : 'wrong'}}">
+            {{answer.answer || '未作答'}}
+          </text>
+          <text class="status">{{answer.correct ? '✓' : '✗'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无听写记录</text>
+    <button class="btn-primary" bindtap="goToIndex">开始听写</button>
+  </view>
+</view>

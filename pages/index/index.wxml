@@ -1,0 +1,27 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">听写助理</text>
+    <text class="subtitle">让学习更轻松</text>
+  </view>
+
+  <view class="feature-list">
+    <view class="feature-item" bindtap="startDictation">
+      <view class="feature-icon">📝</view>
+      <text class="feature-title">开始听写</text>
+      <text class="feature-desc">语音播报，智能听写</text>
+    </view>
+
+    <view class="feature-item" bindtap="goToHistory">
+      <view class="feature-icon">📚</view>
+      <text class="feature-title">历史记录</text>
+      <text class="feature-desc">查看听写历史</text>
+    </view>
+
+    <view class="feature-item" bindtap="importWords">
+      <view class="feature-icon">📥</view>
+      <text class="feature-title">导入词汇</text>
+      <text class="feature-desc">批量导入听写内容</text>
+    </view>
+  </view>
+</view>
